@@ -1,0 +1,29 @@
+{% extends "basic_page.html" %}
+
+{% block title %} Home {% endblock %}
+
+{% block Home_active %} active {% endblock %}
+
+{% block body %} 
+
+{% load static %}
+<div class="container mt-4">
+<div class="row">
+{% for product in data.values %}
+<div class="col-3 mb-4">
+<div class="card" style="width: 18rem;">
+    <img src="../media/{{product.product_images}}" class="card-img-top" alt="{{product.product_name}} image" style="max-width: 18rem; max-height: 10rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{product.product_name}}</h5>
+      <p class="card-text">{{product.product_description}}</p>
+      <p class="card-text"><strike>Price - ₹{{product.price}}</strike>&nbsp;&nbsp;&nbsp;Current Price - ₹{{product.current_Price}}</p>
+      <a href="update_item?item_id={{product.item_id}}" class="btn btn-primary">Edit</a>
+      <a href="delete_item?item_id={{product.item_id}}" class="btn btn-primary">Delete</a>
+    </div>
+  </div>
+</div>
+{% endfor %}
+</div>
+</div>
+
+{% endblock %}

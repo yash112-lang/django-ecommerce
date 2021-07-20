@@ -1,0 +1,63 @@
+{% extends "basic_page.html" %}
+
+{% block title %} Home {% endblock %}
+
+{% block Add_product_active %} active {% endblock %}
+
+{% block body %}
+
+<div class="container mt-4">
+    <form action="add_product_seller" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Product Name</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Product Name"
+                name="product_name">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Price</label>
+            <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Product Price"
+                name="product_price">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Current Price</label>
+            <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Product Price"
+                name="current_product_price">
+        </div>
+        <div class="mb-3">
+
+            <select class="form-select" aria-label="Default select example" name="category">
+                <option selected>Select Category</option>
+                <option value="Kids">Kids</option>
+                <option value="Woman">Woman</option>
+                <option value="Mens">Mens</option>
+                <option value="Cloths">Cloths</option>
+                <option value="Footwear">Footwear</option>
+                <option value="Mobile">Mobile</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Accessories">Accessories</option>
+                <option value="Sunglass">Sunglass</option>
+                <option value="Watch">Watch</option>
+                <option value="Man's Product">Man's Product</option>
+                <option value="Ladies">Ladies</option>
+                <option value="Western Dress">Western Dress</option>
+                <option value="Denim">Denim</option>
+                <option value="Essential">Essential</option>
+            </select>
+
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Product Description</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="formFile" class="form-label">Choose Images</label>
+            <input class="form-control" type="file" multiple id="formFile" name="myFile">
+        </div>
+
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+</div>
+
+{% endblock %}
