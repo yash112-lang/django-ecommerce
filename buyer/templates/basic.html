@@ -41,12 +41,15 @@
             <!-- container // -->
         </nav> <!-- header-top-light.// -->
         <section class="header-main border-bottom bg-white">
+        <form action="search" method="get">
+                    {% csrf_token %}
             <div class="container-fluid">
                 <div class="row p-2 pt-3 pb-3 d-flex align-items-center">
                     <div class="col-md-2"> <img class="d-none d-md-flex" src="https://i.imgur.com/R8QhGhk.png" width="100"> </div>
                     <div class="col-md-8">
-                        <div class="d-flex form-inputs"> <input class="form-control" type="text" placeholder="Search any product..."> <i class="fas fa-search"></i> </div>
+                        <div class="d-flex form-inputs"> <input class="form-control" type="text" placeholder="Search any product..." name="query"> <i class="fas fa-search"></i> </div>
                     </div>
+                    </form>
                     {% if cart_items == 1 %}
                     
                     <div class="col-md-2">

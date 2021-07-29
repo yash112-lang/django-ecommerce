@@ -24,4 +24,5 @@ urlpatterns = [
     path('gotoCart', views.gotoCart),
     path('removeItem', views.removeItem),
     path('gotoPaymentPage', views.gotoPaymentPage),
+    path('search', views.search),
 ]

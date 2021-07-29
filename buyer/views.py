@@ -1,6 +1,5 @@
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
-from django.db.models import Avg, Max, Min, Sum
 from seller.models import add_product
 from buyer.models import add_to_cart as buyer_add_to_cart
 
@@ -19,7 +18,6 @@ def index(request):
     for p in products.values():
         discount.append(int(((p.price - p.current_Price) / p.price) * 100))
     
-    print(discount)
     
     imageList = []
     # for image in data:
@@ -140,3 +138,35 @@ def gotoPaymentPage(request):
             "price": price,
         }
         return render(request, "payment_page.html", context)
+
+def search(request):
+    search_object = request.GET.get("query")
+    result = add_product.objects.filter(product_name__contains=search_object)
+
+    data = add_product.objects.all()
+    products = {}
+    for product in data:
+        if product.item_id not in products:
+            products[product.item_id] = product
+    cart_details = list(buyer_add_to_cart.objects.filter(user_id = request.user.email))
+    cart_price = 0
+    for i in cart_details:
+        cart_price += products[i.product_id].current_Price
+    
+    d = {}
+
+    discount = []
+
+    for p in products.values():
+        discount.append(int(((p.price - p.current_Price) / p.price) * 100))
+    for i in result:
+        if i not in d:
+            d[i.item_id] = i
+    context = {
+        "search": d,
+        "search_object": search_object,
+        "discount": discount,
+        "cart_items": [len(cart_details), cart_price],
+        "number_search": len(list(d.keys())),
+    }
+    return render(request, "search_result.html", context)
